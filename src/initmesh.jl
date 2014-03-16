@@ -30,5 +30,65 @@ function initmesh(G)
 
 end
 
+function pdeigeom(dl,bs,s)
+	nbs = size(dl,2)
+	d = [zeros(1,nbs);
+		ones(1,nbs);
+		dl[6:7,:]]
+
+	bst = bs[:]' # flatten
+
+	if length(find(x->(x<1)|(x>nbs),bst))!=0
+		error("pde:pdeigeom:InvalidBs")
+	end	
+	
+	x = zeros(size(s))
+	y = zeros(size(s))
+
+	(m,n) = size(bs);
+	if m==1 & n==1
+		bs = bs*ones(size(s))
+	elseif m!=size(s,1) | n!=size(s,2)
+		error("pde:pdeigeom:SizeBs")
+	end
+end
+
+function pdeigeom(dl)
+	nbs = size(dl,2)
+	return nbs
+end
+
+function pdeigeom(dl,bs)
+	nbs = size(dl,2)
+	d = [zeros(1,nbs);
+		ones(1,nbs);
+		dl[6:7,:]]
+
+	bst = bs[:]' # flatten
+
+	if length(find(x->(x<1)|(x>nbs),bst))!=0
+		error("pde:pdeigeom:InvalidBs")
+	end	
+
+	return d[:,bst[:]]
+end
+
+function pdemgeom(G,Hmax)
+	nbs = pdeigeom(G)
+	d = pdeigeom(G,1:nbs)
+end
+
+
+
+
 prop = Property()
 show(STDOUT,prop)
+
+
+
+geom = [2 0 1 0 0 1 0;
+        2 1 1 0 1 1 0;
+        2 1 0 1 1 1 0;
+        2 0 0 1 0 1 0]';
+
+pdemgeom(geom,0.5)
