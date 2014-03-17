@@ -50,7 +50,7 @@ function stima(fe::FE)
 	M = spzeros(fe.np,fe.np)
 	K = spzeros(fe.np,fe.np)
 
-	for j = 1:fe.ne
+	for j::Int64 = 1:fe.ne
 		nodes = fe.coordinates[fe.elements[j,:][:],:]
 		G = [ones(1,3);nodes']\[zeros(1,2);eye(2)];
 		@assert det([ones(1,3);nodes'])>=0
@@ -64,7 +64,7 @@ end
 
 function assembly_f(fe::FE,Fforce::Function)
 	b = zeros(fe.np,1)
-	for j = 1:fe.ne
+	for j::Int64 = 1:fe.ne
 		be = det([ones(1,3);
 			fe.coordinates[fe.elements[j,:][:],:]'])*Fforce(
 			sum(fe.coordinates[fe.elements[j,:][:],:],1)/3
