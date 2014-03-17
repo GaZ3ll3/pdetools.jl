@@ -48,4 +48,4 @@ free = setdiff(1:fem.np,fixed)
 
 full(u)[free] = M[free,free]\b[free]
 
-print(u)
+@test all(u.==[0 1 1 0]')
