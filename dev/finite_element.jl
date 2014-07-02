@@ -11,7 +11,7 @@
 # http://www.codeproject.com/info/cpol10.aspx
 
 require("mesh.jl")
-
+require("gmres.jl")
 # Shape Functions
 # Linear Triangle
 N1(xi,eta) = 1 - xi - eta
@@ -278,7 +278,7 @@ function solve_fe(mesh, u, stiffness, fext)
   K = sparse(iu,ju,vu,n_size,n_size)
   
   U = zeros(n_size)
-  U = K\F
+  U = K \ F
 
   for i = 1:mesh.n_nd
     ig = u.global_id[i]  
