@@ -1,5 +1,5 @@
 module pdetools
-
-# export loadmesh
-
-include("init.jl")
+	include("types.jl")
+	include("bases.jl")
+	include("assemble.jl")
+end
