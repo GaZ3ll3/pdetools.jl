@@ -1,0 +1,3 @@
+[submodule "Triangulate.jl"]
+	path = Triangulate.jl
+	url = https://github.com/GaZ3ll3/Triangulate.jl.git
